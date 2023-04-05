@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createUser } from '../services/userAPI';
-import Loading from '../components/Loading';
+import { createUser } from '../../services/userAPI';
+import Loading from '../../components/Loading';
+import { Container } from './styles';
+import logoAppTunes from '../../assets/Logotipo-App-Tunes.png';
 
 class Login extends React.Component {
   state = {
@@ -42,24 +44,30 @@ class Login extends React.Component {
   render() {
     const { name, isButtonDisabled, loading } = this.state;
     return (
-      <div data-testid="page-login">
-        <h1>App Tunes</h1>
-        <input
-          name="name"
-          type="text"
-          onChange={ this.handleChange }
-          value={ name }
-          placeholder='Digite seu nome'
-        />
-        <button
-          type="button"
-          disabled={ isButtonDisabled }
-          onClick={ this.loginSubmit }
-        >
-          Entrar
-        </button>
-        {loading && <Loading />}
-      </div>
+      <Container>
+        <div className="page-login">
+          <img src={logoAppTunes} alt='App Tunes' style={{width: "300px"}}/>
+          <div className='input-div'>
+          {loading ? <Loading /> : 
+          
+            <><input
+                name="name"
+                type="text"
+                onChange={this.handleChange}
+                value={name}
+                placeholder='Digite seu nome' /><button
+                  type="button"
+                  disabled={isButtonDisabled}
+                  onClick={this.loginSubmit}
+                >
+                  Entrar
+                </button></>
+          
+          }
+          </div>
+        </div>
+      </Container>
+      
     );
   }
 }
